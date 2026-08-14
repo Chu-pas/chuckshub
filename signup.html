@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign Up - ChucksHub</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+  body { background: #0a0e27; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+  .auth-box { background: #fff; border-radius: 18px; padding: 40px 36px; width: 100%; max-width: 420px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
+  .logo-wrap { display: flex; align-items: center; gap: 10px; justify-content: center; margin-bottom: 28px; }
+  .logo-wrap span { font-size: 22px; font-weight: 800; color: #0a0e27; }
+  .logo-wrap span b { color: #f59e0b; }
+  h2 { text-align: center; font-size: 22px; margin-bottom: 6px; color: #0a0e27; }
+  .sub { text-align: center; color: #64748b; font-size: 13px; margin-bottom: 28px; }
+  form { display: flex; flex-direction: column; gap: 14px; }
+  label { font-size: 13px; font-weight: 600; color: #334155; margin-bottom: -8px; }
+  input { padding: 13px 14px; border: 1.5px solid #e2e8f0; border-radius: 9px; font-size: 14px; }
+  input:focus { outline: none; border-color: #fbbf24; }
+  .submit-btn { background: #0a0e27; color: #fbbf24; border: none; padding: 14px; border-radius: 9px; font-weight: 700; font-size: 15px; cursor: pointer; margin-top: 6px; }
+  .submit-btn:hover { background: #1a1f4e; }
+  .switch-link { text-align: center; margin-top: 20px; font-size: 13px; color: #64748b; }
+  .switch-link a { color: #f59e0b; font-weight: 700; text-decoration: none; }
+  .error-msg { background: #fef2f2; color: #dc2626; padding: 10px 14px; border-radius: 8px; font-size: 13px; display: none; }
+  .success-msg { background: #f0fdf4; color: #16a34a; padding: 10px 14px; border-radius: 8px; font-size: 13px; display: none; }
+</style>
+</head>
+<body>
+
+<div class="auth-box">
+  <div class="logo-wrap">
+    <svg width="28" height="28" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="40" height="40" rx="10" fill="#fbbf24"/>
+      <path d="M12 14C12 11.7909 13.7909 10 16 10H24C26.2091 10 28 11.7909 28 14V26C28 28.2091 26.2091 30 24 30H16C13.7909 30 12 28.2091 12 26V14Z" fill="#0a0e27"/>
+      <path d="M17 17H23M17 20H23M17 23H21" stroke="#fbbf24" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <span>Chucks<b>Hub</b></span>
+  </div>
+  <h2>Create your account</h2>
+  <div class="sub">Join ChucksHub and start shopping today</div>
+
+  <div class="error-msg" id="errorMsg"></div>
+  <div class="success-msg" id="successMsg"></div>
+
+  <form id="signupForm">
+    <label>Full Name</label>
+    <input type="text" id="fullName" placeholder="e.g. Chidinma Okafor" required>
+    <label>Email Address</label>
+    <input type="email" id="email" placeholder="you@example.com" required>
+    <label>Phone Number</label>
+    <input type="tel" id="phone" placeholder="080XXXXXXXX" required>
+    <label>Password</label>
+    <input type="password" id="password" placeholder="At least 6 characters" required minlength="6">
+    <button type="submit" class="submit-btn">Create Account</button>
+  </form>
+
+  <div class="switch-link">Already have an account? <a href="login.html">Log In</a></div>
+</div>
+
+<script>
+  document.getElementById('signupForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    // Backend integration coming next — for now this just previews the UI
+    document.getElementById('errorMsg').style.display = 'none';
+    document.getElementById('successMsg').style.display = 'block';
+    document.getElementById('successMsg').textContent = 'Account creation will be enabled once backend is connected.';
+  });
+</script>
+
+</body>
+</html>
