@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ChucksHub - Everything You Need</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+  body { background: #fff; color: #1a1a1a; }
+
+  header { background: rgba(10,14,39,0.95); padding: 16px 32px; display: flex; justify-content: space-between; align-items: center; position: fixed; top: 0; left: 0; right: 0; z-index: 100; backdrop-filter: blur(8px); }
+  .logo-wrap { display: flex; align-items: center; gap: 10px; }
+  .logo-wrap span { font-size: 22px; font-weight: 800; color: #fff; }
+  .logo-wrap span b { color: #fbbf24; }
+  .nav-actions { display: flex; gap: 12px; }
+  .btn-outline { background: transparent; border: 1.5px solid #fbbf24; color: #fbbf24; padding: 9px 20px; border-radius: 8px; font-weight: 700; cursor: pointer; text-decoration: none; font-size: 14px; }
+  .btn-filled { background: #fbbf24; border: none; color: #0a0e27; padding: 10px 22px; border-radius: 8px; font-weight: 700; cursor: pointer; text-decoration: none; font-size: 14px; }
+
+  .hero { min-height: 100vh; background: linear-gradient(rgba(10,14,39,0.75), rgba(10,14,39,0.85)), url('background image.jpg') center/cover no-repeat; display: flex; align-items: center; justify-content: center; text-align: center; color: #fff; padding: 100px 20px 40px; }
+  .hero-content h1 { font-size: 44px; font-weight: 800; margin-bottom: 16px; max-width: 700px; }
+  .hero-content span { color: #fbbf24; }
+  .hero-content p { font-size: 17px; color: #cbd5e1; max-width: 550px; margin: 0 auto 32px; }
+  .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .hero-btns a { padding: 14px 30px; border-radius: 10px; font-weight: 700; font-size: 15px; text-decoration: none; }
+  .hero-btns .primary { background: #fbbf24; color: #0a0e27; }
+  .hero-btns .secondary { background: transparent; border: 2px solid #fff; color: #fff; }
+
+  .section { padding: 80px 32px; max-width: 1100px; margin: 0 auto; }
+  .section-title { text-align: center; font-size: 30px; font-weight: 800; margin-bottom: 12px; color: #0a0e27; }
+  .section-sub { text-align: center; color: #64748b; margin-bottom: 50px; font-size: 15px; }
+
+  .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; }
+  .feature-card { text-align: center; }
+  .feature-card img { width: 100%; height: 200px; object-fit: cover; border-radius: 14px; margin-bottom: 18px; box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
+  .feature-card h3 { font-size: 18px; margin-bottom: 8px; color: #0a0e27; }
+  .feature-card p { font-size: 14px; color: #64748b; line-height: 1.5; }
+
+  .why-us { background: #0a0e27; color: #fff; padding: 80px 32px; }
+  .why-us .section-title, .why-us .section-sub { color: #fff; }
+  .why-us .section-sub { color: #a8b0d3; }
+  .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; max-width: 1000px; margin: 0 auto; }
+  .why-item { text-align: center; padding: 20px; }
+  .why-item .icon { font-size: 32px; margin-bottom: 14px; }
+  .why-item h4 { font-size: 16px; margin-bottom: 8px; }
+  .why-item p { font-size: 13px; color: #a8b0d3; }
+
+  .cta { text-align: center; padding: 80px 32px; background: #f8fafc; }
+  .cta h2 { font-size: 28px; font-weight: 800; color: #0a0e27; margin-bottom: 14px; }
+  .cta p { color: #64748b; margin-bottom: 28px; }
+  .cta a { background: #0a0e27; color: #fbbf24; padding: 15px 34px; border-radius: 10px; font-weight: 700; text-decoration: none; font-size: 15px; }
+
+  footer { text-align: center; padding: 30px; color: #6b7280; font-size: 13px; background: #fff; border-top: 1px solid #e5e7eb; }
+
+  @media (max-width: 600px) {
+    .hero-content h1 { font-size: 30px; }
+    header { padding: 14px 18px; }
+    .nav-actions { gap: 8px; }
+    .btn-outline, .btn-filled { padding: 8px 14px; font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-wrap">
+    <svg width="30" height="30" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="40" height="40" rx="10" fill="#fbbf24"/>
+      <path d="M12 14C12 11.7909 13.7909 10 16 10H24C26.2091 10 28 11.7909 28 14V26C28 28.2091 26.2091 30 24 30H16C13.7909 30 12 28.2091 12 26V14Z" fill="#0a0e27"/>
+      <path d="M17 17H23M17 20H23M17 23H21" stroke="#fbbf24" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <span>Chucks<b>Hub</b></span>
+  </div>
+  <div class="nav-actions">
+    <a href="login.html" class="btn-outline">Login</a>
+    <a href="signup.html" class="btn-filled">Sign Up</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <h1>Everything you need, <span>in one place</span></h1>
+    <p>ChucksHub brings you quality products across every category — electronics, fashion, home essentials and more — delivered fast, paid securely.</p>
+    <div class="hero-btns">
+      <a href="signup.html" class="primary">Get Started</a>
+      <a href="index.html" class="secondary">Browse as Guest</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-title">What We Do</div>
+  <div class="section-sub">A one-stop marketplace built for convenience, trust, and speed</div>
+  <div class="features">
+    <div class="feature-card">
+      <img src="background image1.jpg" alt="Wide product range">
+      <h3>Wide Product Range</h3>
+      <p>From electronics to fashion to home goods — find everything you need without hopping between multiple sites.</p>
+    </div>
+    <div class="feature-card">
+      <img src="background image2.jpg" alt="Fast delivery">
+      <h3>Fast, Reliable Delivery</h3>
+      <p>We partner with trusted logistics to get your orders to your doorstep quickly, wherever you are.</p>
+    </div>
+    <div class="feature-card">
+      <img src="background image3.jpg" alt="Secure payment">
+      <h3>Secure Payments</h3>
+      <p>Pay with confidence using card, bank transfer, or USSD — all transactions protected end-to-end.</p>
+    </div>
+  </div>
+</section>
+
+<section class="why-us">
+  <div class="section-title">Why Shop With ChucksHub</div>
+  <div class="section-sub">Built around what matters to you</div>
+  <div class="why-grid">
+    <div class="why-item"><div class="icon">✅</div><h4>Verified Products</h4><p>Every listing is checked for quality and accuracy</p></div>
+    <div class="why-item"><div class="icon">💳</div><h4>Flexible Payment</h4><p>Multiple secure payment options via Flutterwave</p></div>
+    <div class="why-item"><div class="icon">📦</div><h4>Order Tracking</h4><p>Know exactly where your order is, every step</p></div>
+    <div class="why-item"><div class="icon">🤝</div><h4>Customer First</h4><p>Support that actually listens and helps</p></div>
+  </div>
+</section>
+
+<section class="cta">
+  <h2>Ready to start shopping?</h2>
+  <p>Join ChucksHub today and discover products you'll love</p>
+  <a href="signup.html">Create Your Account</a>
+</section>
+
+<footer>&copy; 2026 ChucksHub. All rights reserved.</footer>
+
+</body>
+</html>

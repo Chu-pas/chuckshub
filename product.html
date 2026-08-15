@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product - ChucksHub</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+  body { background: #f0f2f5; color: #1a1a1a; }
+
+  header { background: #0a0e27; padding: 14px 32px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+  .logo-wrap { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .logo-wrap span { font-size: 22px; font-weight: 800; color: #fff; }
+  .logo-wrap span b { color: #fbbf24; }
+  .cart-btn { background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #0a0e27; border: none; padding: 11px 20px; border-radius: 10px; font-weight: 700; cursor: pointer; font-size: 14px; }
+
+  .breadcrumb { padding: 16px 32px; font-size: 13px; color: #64748b; background: #fff; border-bottom: 1px solid #e5e7eb; }
+  .breadcrumb a { color: #64748b; text-decoration: none; }
+  .breadcrumb a:hover { color: #0a0e27; }
+
+  .product-wrap { max-width: 1100px; margin: 24px auto; padding: 0 20px; display: grid; grid-template-columns: 1fr 1.1fr; gap: 40px; }
+  @media (max-width: 800px) { .product-wrap { grid-template-columns: 1fr; } }
+
+  .gallery { background: #fff; border-radius: 16px; padding: 20px; }
+  .main-img { width: 100%; height: 380px; object-fit: contain; background: #f8fafc; border-radius: 12px; margin-bottom: 14px; }
+  .thumb-row { display: flex; gap: 10px; overflow-x: auto; }
+  .thumb-row img { width: 70px; height: 70px; object-fit: cover; border-radius: 8px; cursor: pointer; border: 2px solid transparent; background: #f8fafc; }
+  .thumb-row img.active { border-color: #fbbf24; }
+
+  .info-panel { background: #fff; border-radius: 16px; padding: 28px; }
+  .info-panel h1 { font-size: 22px; font-weight: 800; color: #0a0e27; margin-bottom: 10px; line-height: 1.3; }
+  .rating-row { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
+  .stars { color: #fbbf24; font-size: 15px; }
+  .rating-row .count { color: #64748b; font-size: 13px; }
+  .price-row { font-size: 30px; font-weight: 800; color: #0a0e27; margin-bottom: 18px; }
+  .stock-status { display: inline-block; font-size: 12px; font-weight: 700; padding: 5px 12px; border-radius: 20px; margin-bottom: 20px; }
+  .stock-status.in { background: #dcfce7; color: #16a34a; }
+  .stock-status.out { background: #fef2f2; color: #dc2626; }
+
+  .size-section { margin-bottom: 22px; }
+  .size-section label { font-size: 13px; font-weight: 700; color: #334155; display: block; margin-bottom: 10px; }
+  .size-options { display: flex; gap: 10px; flex-wrap: wrap; }
+  .size-btn { padding: 10px 16px; border: 1.5px solid #d1d5db; border-radius: 8px; background: #fff; font-size: 13px; font-weight: 600; cursor: pointer; }
+  .size-btn.selected { background: #0a0e27; color: #fbbf24; border-color: #0a0e27; }
+
+  .qty-section { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+  .qty-section label { font-size: 13px; font-weight: 700; color: #334155; }
+  .qty-controls { display: flex; align-items: center; gap: 12px; border: 1.5px solid #d1d5db; border-radius: 8px; padding: 6px 12px; }
+  .qty-controls button { background: none; border: none; font-size: 18px; cursor: pointer; font-weight: 700; color: #0a0e27; }
+  .qty-controls span { font-weight: 700; min-width: 20px; text-align: center; }
+
+  .action-buttons { display: flex; gap: 12px; margin-bottom: 24px; }
+  .action-buttons button { flex: 1; padding: 15px; border-radius: 10px; font-weight: 700; font-size: 14px; cursor: pointer; border: none; }
+  .btn-add { background: #0a0e27; color: #fbbf24; }
+  .btn-buy { background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #0a0e27; }
+
+  .delivery-box { border: 1px solid #e5e7eb; border-radius: 12px; padding: 16px; font-size: 13px; color: #475569; }
+  .delivery-box div { display: flex; align-items: center; gap: 10px; padding: 6px 0; }
+
+  .desc-section { max-width: 1100px; margin: 30px auto; padding: 28px; background: #fff; border-radius: 16px; }
+  .desc-section h2 { font-size: 18px; font-weight: 800; color: #0a0e27; margin-bottom: 14px; }
+  .desc-section p { font-size: 14px; line-height: 1.7; color: #475569; }
+
+  footer { text-align: center; padding: 30px; color: #6b7280; font-size: 13px; background: #fff; border-top: 1px solid #e5e7eb; margin-top: 30px; }
+  .loading-msg, .error-msg { text-align: center; padding: 60px 20px; color: #64748b; }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo-wrap">
+    <svg width="30" height="30" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="40" height="40" rx="10" fill="#fbbf24"/>
+      <path d="M12 14C12 11.7909 13.7909 10 16 10H24C26.2091 10 28 11.7909 28 14V26C28 28.2091 26.2091 30 24 30H16C13.7909 30 12 28.2091 12 26V14Z" fill="#0a0e27"/>
+      <path d="M17 17H23M17 20H23M17 23H21" stroke="#fbbf24" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <span>Chucks<b>Hub</b></span>
+  </a>
+  <button class="cart-btn" onclick="window.location.href='index.html'">🛒 Back to Shop</button>
+</header>
+
+<div class="breadcrumb">
+  <a href="index.html">Home</a> &nbsp;›&nbsp; <span id="breadcrumbCat">Category</span> &nbsp;›&nbsp; <span id="breadcrumbName">Product</span>
+</div>
+
+<div id="content">
+  <p class="loading-msg">Loading product...</p>
+</div>
+
+<footer>&copy; 2026 ChucksHub. All rights reserved.</footer>
+
+<script>
+  const API_BASE = 'https://chuckshub-backend.onrender.com/api';
+  const params = new URLSearchParams(window.location.search);
+  const productId = params.get('id');
+
+  let product = null;
+  let selectedSize = null;
+  let qty = 1;
+
+  async function loadProduct() {
+    if (!productId) {
+      document.getElementById('content').innerHTML = '<p class="error-msg">No product specified.</p>';
+      return;
+    }
+    try {
+      const res = await fetch(`${API_BASE}/products/${productId}`);
+      if (!res.ok) throw new Error('Not found');
+      product = await res.json();
+      renderProduct();
+    } catch (err) {
+      document.getElementById('content').innerHTML = '<p class="error-msg">Product not found. It may have been removed.</p>';
+    }
+  }
+
+  function renderProduct() {
+    document.title = product.name + ' - ChucksHub';
+    document.getElementById('breadcrumbCat').textContent = product.category;
+    document.getElementById('breadcrumbName').textContent = product.name;
+
+    const gallery = (product.images && product.images.length) ? product.images : [product.image];
+    const isInStock = product.stock > 0;
+
+    // Basic auto-detect: if category suggests clothing/shoes, show default sizes (can be overridden by product.sizes from DB)
+    const sizes = product.sizes && product.sizes.length ? product.sizes : [];
+
+    document.getElementById('content').innerHTML = `
+      <div class="product-wrap">
+        <div class="gallery">
+          <img class="main-img" id="mainImg" src="${gallery[0] || 'https://via.placeholder.com/400x400/0a0e27/fbbf24?text=ChucksHub'}" alt="${product.name}">
+          <div class="thumb-row" id="thumbRow">
+            ${gallery.map((img, i) => `<img src="${img}" class="${i === 0 ? 'active' : ''}" onclick="setMainImage('${img}', this)">`).join('')}
+          </div>
+        </div>
+
+        <div class="info-panel">
+          <h1>${product.name}</h1>
+          <div class="rating-row">
+            <span class="stars">${'★'.repeat(Math.round(product.rating || 4))}${'☆'.repeat(5 - Math.round(product.rating || 4))}</span>
+            <span class="count">(${product.numReviews || 0} reviews)</span>
+          </div>
+          <div class="price-row">₦${product.price.toLocaleString()}</div>
+          <div class="stock-status ${isInStock ? 'in' : 'out'}">${isInStock ? `✓ In Stock (${product.stock} left)` : '✗ Out of Stock'}</div>
+
+          ${sizes.length ? `
+          <div class="size-section">
+            <label>Select Size</label>
+            <div class="size-options" id="sizeOptions">
+              ${sizes.map(s => `<button class="size-btn" onclick="selectSize('${s}', this)">${s}</button>`).join('')}
+            </div>
+          </div>` : ''}
+
+          <div class="qty-section">
+            <label>Quantity</label>
+            <div class="qty-controls">
+              <button onclick="changeQty(-1)">−</button>
+              <span id="qtyDisplay">1</span>
+              <button onclick="changeQty(1)">+</button>
+            </div>
+          </div>
+
+          <div class="action-buttons">
+            <button class="btn-add" onclick="addToCartFromDetail()" ${!isInStock ? 'disabled' : ''}>Add to Cart</button>
+            <button class="btn-buy" onclick="buyNow()" ${!isInStock ? 'disabled' : ''}>Buy Now</button>
+          </div>
+
+          <div class="delivery-box">
+            <div>🚚 &nbsp; Fast delivery available nationwide</div>
+            <div>🔒 &nbsp; Secure payment via card, transfer, or USSD</div>
+            <div>↩️ &nbsp; Easy returns within 7 days</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="desc-section">
+        <h2>Product Description</h2>
+        <p>${product.description}</p>
+      </div>
+    `;
+
+    if (sizes.length) selectedSize = null;
+  }
+
+  function setMainImage(src, el) {
+    document.getElementById('mainImg').src = src;
+    document.querySelectorAll('.thumb-row img').forEach(img => img.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  function selectSize(size, el) {
+    selectedSize = size;
+    document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+
+  function changeQty(delta) {
+    qty = Math.max(1, qty + delta);
+    if (product.stock) qty = Math.min(qty, product.stock);
+    document.getElementById('qtyDisplay').textContent = qty;
+  }
+
+  function getCart() {
+    return JSON.parse(localStorage.getItem('chuckshub_cart') || '[]');
+  }
+
+  function saveCart(cart) {
+    localStorage.setItem('chuckshub_cart', JSON.stringify(cart));
+  }
+
+  function addToCartFromDetail() {
+    if (product.sizes && product.sizes.length && !selectedSize) {
+      alert('Please select a size first.');
+      return;
+    }
+    const cart = getCart();
+    const cartKey = product._id + (selectedSize || '');
+    const existing = cart.find(item => (item._id + (item.size || '')) === cartKey);
+    if (existing) {
+      existing.qty += qty;
+    } else {
+      cart.push({ _id: product._id, name: product.name, price: product.price, image: (product.images && product.images[0]) || product.image, size: selectedSize, qty: qty });
+    }
+    saveCart(cart);
+    alert('Added to cart!');
+  }
+
+  function buyNow() {
+    addToCartFromDetail();
+    window.location.href = 'index.html';
+  }
+
+  loadProduct();
+</script>
+
+</body>
+</html>
