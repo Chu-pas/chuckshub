@@ -82,7 +82,7 @@
     <p>ChucksHub brings you quality products across every category — electronics, fashion, home essentials and more — delivered fast, paid securely.</p>
     <div class="hero-btns">
       <a href="signup.html" class="primary">Get Started</a>
-      <a href="index.html" class="secondary">Browse as Guest</a>
+     <a href="shop.html" class="secondary">Browse as Guest</a>
     </div>
   </div>
 </section>
@@ -127,6 +127,12 @@
 </section>
 
 <footer>&copy; 2026 ChucksHub. All rights reserved.</footer>
+<script>
+  const token = localStorage.getItem('chuckshub_token');
+  if (token) {
+    window.location.href = 'shop.html';
+  }
+</script>
 
 </body>
 </html>
