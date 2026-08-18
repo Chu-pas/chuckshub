@@ -85,7 +85,10 @@
     </svg>
     <span>Chucks<b>Hub</b></span>
   </div>
+ <div style="display:flex; gap:10px; align-items:center;">
+  <button id="logoutBtn" onclick="logout()" style="background:transparent; border:1.5px solid #fbbf24; color:#fbbf24; padding:9px 16px; border-radius:8px; font-weight:700; cursor:pointer; font-size:13px; display:none;">Logout</button>
   <button class="cart-btn" onclick="toggleCart(true)">🛒 Cart (<span id="cartCount">0</span>)</button>
+</div>
 </header>
 
 <div class="hero">
@@ -307,7 +310,20 @@
       onclose: function () {}
     });
   });
+function checkLoginStatus() {
+  const token = localStorage.getItem('chuckshub_token');
+  if (token) {
+    document.getElementById('logoutBtn').style.display = 'inline-block';
+  }
+}
 
+function logout() {
+  localStorage.removeItem('chuckshub_token');
+  localStorage.removeItem('chuckshub_customer');
+  window.location.href = 'index.html';
+}
+
+checkLoginStatus();
   loadProducts();
 </script>
 
