@@ -13,7 +13,12 @@
   .logo-wrap span { font-size: 22px; font-weight: 800; color: #fff; letter-spacing: -0.5px; }
   .logo-wrap span b { color: #fbbf24; }
   header .cart-btn { background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #0a0e27; border: none; padding: 11px 20px; border-radius: 10px; font-weight: 700; cursor: pointer; font-size: 14px; display: flex; align-items: center; gap: 6px; box-shadow: 0 2px 8px rgba(251,191,36,0.3); }
-
+@media (max-width: 480px) {
+  header { padding: 12px 16px; flex-wrap: wrap; gap: 10px; }
+  .logo-wrap span { font-size: 18px; }
+  #logoutBtn { padding: 7px 12px; font-size: 12px; }
+  .cart-btn { padding: 9px 14px; font-size: 12px; white-space: nowrap; }
+}
   .hero { background: linear-gradient(135deg, #0a0e27 0%, #1a1f4e 60%, #2d1b4e 100%); color: #fff; text-align: center; padding: 70px 20px 60px; position: relative; overflow: hidden; }
   .hero::before { content: ''; position: absolute; top: -50%; right: -10%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(251,191,36,0.15), transparent 70%); border-radius: 50%; }
   .hero h2 { font-size: 36px; margin-bottom: 12px; font-weight: 800; position: relative; }
@@ -85,7 +90,7 @@
     </svg>
     <span>Chucks<b>Hub</b></span>
   </div>
- <div style="display:flex; gap:10px; align-items:center;">
+<div style="display:flex; gap:8px; align-items:center; flex-shrink:0;">
   <button id="logoutBtn" onclick="logout()" style="background:transparent; border:1.5px solid #fbbf24; color:#fbbf24; padding:9px 16px; border-radius:8px; font-weight:700; cursor:pointer; font-size:13px; display:none;">Logout</button>
   <button class="cart-btn" onclick="toggleCart(true)">🛒 Cart (<span id="cartCount">0</span>)</button>
 </div>
